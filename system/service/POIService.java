@@ -34,13 +34,19 @@ public class POIService {
 			poi.put("altitude", e.getAltitude());
 			poi.put("type", e.getType());
 			poi.put("desc", e.getDesc());
-			poi.put("extra",lessonService.getRecentlyLesson(e));
+			if(e.getType().equals("lesson")){
+				poi.put("extra",lessonService.getRecentlyLesson(e));
+			}else if(e.getType().equals("movie")){
+				poi.put("extra","");
+			}else{
+				poi.put("extra","");
+			}
 			poiList.add(poi);
 		});
 		return poiList;
 	}
 	
-	public void addPoi(double latitude,double longitude,double altitude,double type,String desc){
+	public void addPoi(double latitude,double longitude,double altitude,String type,String desc){
 		POI poi = new POI();
 		poi.setLatitude(latitude);
 		poi.setLongitude(longitude);
@@ -48,6 +54,13 @@ public class POIService {
 		poi.setType(type);
 		poi.setDesc(desc);
 		poiDao.insert(poi);
+	}
+
+
+	public Object getPOIVicinity(String geohash) {
+		
+		
+		return null;
 	}
 	
 	

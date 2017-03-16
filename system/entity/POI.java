@@ -16,7 +16,7 @@ public class POI {
 	
 	private double altitude;
 	
-	private double type;
+	private String type;
 	
 	private String desc;
 	
