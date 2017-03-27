@@ -29,5 +29,56 @@ public class POIController {
 			e.printStackTrace();
 			return null;
 		}
-	}	
+	}
+	
+	@RequestMapping(path = "vicinityUnSafe")
+	@ResponseBody
+	public Status getLatLon(
+			@RequestParam double latitude,
+			@RequestParam double longitude
+			){
+		try {
+			return new Status(true, StatusCode.SUCCESS, poiService.getPOIVicinity(latitude,longitude), null);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	
+	@RequestMapping(path = "new")
+	@ResponseBody
+	public Status newPoi(
+			@RequestParam double latitude,
+			@RequestParam double longitude,
+			@RequestParam double altitude,
+			@RequestParam String type,
+			@RequestParam String des
+			){
+		try {
+			//return new Status(true, StatusCode.SUCCESS, poiService.getPOIVicinity(geohash), null);
+			return null;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	@RequestMapping(path = "modify")
+	@ResponseBody
+	public Status modifyPoi(
+			@RequestParam int poiId,
+			@RequestParam double latitude,
+			@RequestParam double longitude
+			){
+		try {
+			return new Status(true, StatusCode.SUCCESS, poiService.modifyPoi(poiId,latitude,longitude), null);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	
+	
 }

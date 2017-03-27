@@ -10,7 +10,9 @@ import com.wemeow.web.system.entity.POI;
 
 @Repository
 public interface POIDao {
-	List<POI> selectPOI();
 	void insert(POI poi);
+	List<POI> selectPOI(double latitude,double longitude);
+	List<POI> selectPOIByGeohash(String geohash);
+	void updateGeohash(POI poi);
 
 }

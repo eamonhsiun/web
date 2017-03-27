@@ -25,8 +25,8 @@ public class Lesson {
 	private int startWeek;
 	private int endWeek;
 	private int alternation;
-	private String startTime;
-	private String endTime;
+	private int startTime;
+	private int endTime;
 	
 	private int locationId;
 	private String district;

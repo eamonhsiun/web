@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 public class POI {
 	private int id;
 	
+	private String geohash;
+	
 	private double latitude;
 	
 	private double longitude;
@@ -18,7 +20,7 @@ public class POI {
 	
 	private String type;
 	
-	private String desc;
+	private String des;
 	
 	private Object extra;
 }

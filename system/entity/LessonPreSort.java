@@ -25,8 +25,8 @@ public class LessonPreSort {
 	private int startWeek;
 	private int endWeek;
 	private int alternation;
-	private String startTime;
-	private String endTime;
+	private int startTime;
+	private int endTime;
 	
 	private int locationId;
 	private String district;
@@ -55,4 +55,17 @@ public class LessonPreSort {
 	//pub_optional
 	private String kind;
 	//
+
+	@Override
+	public String toString() {
+		return "LessonPreSort [id=" + id + ", lessonName=" + lessonName + ", point=" + point + ", teacher=" + teacher
+				+ ", teacherStatus=" + teacherStatus + ", department=" + department + ", type=" + type
+				+ ", timeAndPosition=" + timeAndPosition + ", week=" + week + ", startWeek=" + startWeek + ", endWeek="
+				+ endWeek + ", alternation=" + alternation + ", startTime=" + startTime + ", endTime=" + endTime
+				+ ", locationId=" + locationId + ", district=" + district + ", build=" + build + ", floor=" + floor
+				+ ", room=" + room + ", book=" + book + ", year=" + year + ", term=" + term + ", grade=" + grade
+				+ ", status=" + status + ", classDes=" + classDes + ", remark=" + remark + ", kind=" + kind + "]";
+	}
+	
+	
 }

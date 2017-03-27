@@ -21,6 +21,7 @@ public interface LessonDao {
 	void updateLocationId(Lesson lesson);
 	
 	List<Lesson> selectLsnRecentlyAtPoi(int poiId);
+	List<Lesson> selectRecentLesson(@Param("poiId")int poiId, @Param("week")int week, @Param("time")double time);
 	
 	
 }

@@ -6,17 +6,18 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.wemeow.web.system.entity.Lesson;
+import com.wemeow.web.system.entity.LessonPreSort;
 
 
 
 @Repository
 public interface LessonSortDao {
-	List<Lesson> selectLsnPubRequired();
-	List<Lesson> selectLsnPubOptional();
-	List<Lesson> selectLsnPlan();
-//	List<Lesson> selectLsnWhu();
+	List<LessonPreSort> selectLsnPubRequired();
+	List<LessonPreSort> selectLsnPubOptional();
+	List<LessonPreSort> selectLsnPlan();
+	List<LessonPreSort> selectLsnWhu();
 //	List<Lesson> selectByLocation(@Param("locationId")int locationId,@Param("week")int week);
 //	
-//	void insertNewLesson(Lesson lesson);
-//	void updateLocationId(Lesson lesson);
+	void insertNewLesson(LessonPreSort lesson);
+	void updatePoiId(LessonPreSort lesson);
 }
