@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class User{
 	private int id;
 	
 	private String nickname;
@@ -18,8 +18,6 @@ public class User {
 	private String phone;
 	
 	private int tokenId;
-	
-	private int passwordId;
 	
 	private String password;
 	
@@ -37,5 +35,14 @@ public class User {
 	
 	private String updateBy;
 	
+	@Override
+	public boolean equals(Object obj) {
+		if(!(obj instanceof User))return false;
+		return ((User)obj).getId()==this.id;
+	}
 	
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
 }

@@ -2,10 +2,8 @@ package com.wemeow.web.system.dao;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
-import com.wemeow.web.system.entity.Lesson;
 import com.wemeow.web.system.entity.LessonPreSort;
 
 

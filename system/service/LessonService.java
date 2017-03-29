@@ -127,39 +127,39 @@ public class LessonService {
 	}
 
 	
-
-	private String recognizeStartTime(int i) {
-		switch(i){
-		case 1:
-			return "08:00";
-		case 2:
-			return "08:50";
-		case 3:
-			return "09:50";
-		case 4:
-			return "10:40";
-		case 5:
-			return "11:30";
-		case 6:
-			return "14:05";
-		case 7:
-			return "14:55";
-		case 8:
-			return "15:45";
-		case 9:
-			return "16:40";
-		case 10:
-			return "17:30";		
-		case 11:
-			return "18:30";		
-		case 12:
-			return "19:20";		
-		case 13:
-			return "20:10";		
-		
-		}
-		return "";
-	}
+//
+//	private String recognizeStartTime(int i) {
+//		switch(i){
+//		case 1:
+//			return "08:00";
+//		case 2:
+//			return "08:50";
+//		case 3:
+//			return "09:50";
+//		case 4:
+//			return "10:40";
+//		case 5:
+//			return "11:30";
+//		case 6:
+//			return "14:05";
+//		case 7:
+//			return "14:55";
+//		case 8:
+//			return "15:45";
+//		case 9:
+//			return "16:40";
+//		case 10:
+//			return "17:30";		
+//		case 11:
+//			return "18:30";		
+//		case 12:
+//			return "19:20";		
+//		case 13:
+//			return "20:10";		
+//		
+//		}
+//		return "";
+//	}
 
 
 	private static double getWhuClassNow(int hour,int minute){
@@ -221,40 +221,40 @@ public class LessonService {
 	
 	
 	
-	
-	private String recognizeEndTime(int i) {
-		switch(i){
-		case 1:
-			return "08:45";
-		case 2:
-			return "09:35";
-		case 3:
-			return "10:35";
-		case 4:
-			return "11:25";
-		case 5:
-			return "12:15";
-		case 6:
-			return "14:50";
-		case 7:
-			return "15:40";
-		case 8:
-			return "16:30";
-		case 9:
-			return "17:25";
-		case 10:
-			return "18:15";		
-		case 11:
-			return "19:15";		
-		case 12:
-			return "20:05";		
-		case 13:
-			return "20:55";		
-		
-		}
-		return "";
-	}
-
+//	
+//	private String recognizeEndTime(int i) {
+//		switch(i){
+//		case 1:
+//			return "08:45";
+//		case 2:
+//			return "09:35";
+//		case 3:
+//			return "10:35";
+//		case 4:
+//			return "11:25";
+//		case 5:
+//			return "12:15";
+//		case 6:
+//			return "14:50";
+//		case 7:
+//			return "15:40";
+//		case 8:
+//			return "16:30";
+//		case 9:
+//			return "17:25";
+//		case 10:
+//			return "18:15";		
+//		case 11:
+//			return "19:15";		
+//		case 12:
+//			return "20:05";		
+//		case 13:
+//			return "20:55";		
+//		
+//		}
+//		return "";
+//	}
+//
 
 
 
