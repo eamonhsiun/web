@@ -82,7 +82,9 @@ public class UserService {
 	}
 	
 	public Object insertFollower(int userId,int followId){
+		
 		return userDao.insertFollower(userId, followId);
+		
 	}
 
 
