@@ -6,46 +6,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.wemeow.web.user.entity.Captcha;
 import com.wemeow.web.user.service.CaptchaService;
-import com.wemeow.web.util.Status;
-import com.wemeow.web.util.StatusCode;
+import com.wemeow.web.util.RequestLimit;
+import com.wemeow.web.util.state.Status;
+import com.wemeow.web.util.state.StatusCode;
+import com.wemeow.web.util.state.StatusException;
 
+@RequestLimit(RequestLimit.USER_PUBLIC)
 @Controller
-@RequestMapping("captcha")
+@RequestMapping("user")
 public class CatpthaController {
 
 	@Autowired
 	private CaptchaService captchaService;
 	
-	@RequestMapping(path = "new")
+	@RequestMapping(path = "captcha")
 	@ResponseBody
-	public Status newCaptha(
+	public Status create(
 			@RequestParam String phone
 			){
 		try {
-			Captcha captcha =captchaService.genNewCaptcha(phone);
-			return new Status(true, StatusCode.SUCCESS, captcha.getId(), captcha.getVCode());
+			return new Status(true, StatusCode.SUCCESS, captchaService.create(phone), null);
 		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
+			return StatusException.procExcp(e);
 		}
 	}
-	
-	@RequestMapping(path = "test")
-	@ResponseBody
-	public Status getCaptchaById(
-			@RequestParam int id
-			){
-		try {
-			Captcha captcha =captchaService.getCaptchaById(id);
-			return new Status(true, StatusCode.SUCCESS, captcha.getId(), captcha.getVCode());
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
-	
 	
 	
 }

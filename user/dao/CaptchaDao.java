@@ -6,6 +6,12 @@ import com.wemeow.web.user.entity.Captcha;
 
 @Repository
 public interface CaptchaDao {
-	Captcha getCodeById(int id);
+	int invalidOldCapthcha(int id);
+
+	Captcha getCaptchaById(int capthaId);
+
+	Captcha getCaptchaByPhone(String phone);
+
 	int insertNewCaptcha(Captcha captcha);
+
 }

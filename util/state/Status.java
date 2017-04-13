@@ -1,4 +1,4 @@
-package com.wemeow.web.util;
+package com.wemeow.web.util.state;
 
 
 public class Status {

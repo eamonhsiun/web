@@ -1,4 +1,4 @@
-package com.wemeow.web.util;
+package com.wemeow.web.util.state;
 
 
 
@@ -38,12 +38,12 @@ public class StatusCode {
 	/**
 	 * 验证码过期
 	 */
-	public static final int CHECKER_N_VAILD=706;
+	public static final int CAPTCHA_N_VAILD=706;
 	
 	/**
 	 * 验证码错误
 	 */
-	public static final int CHECKER_ERROR=707;
+	public static final int CAPTCHA_ERROR=707;
 
 	/**
 	 * 密码错误
