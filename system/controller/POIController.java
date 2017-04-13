@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wemeow.web.system.service.POIService;
-import com.wemeow.web.util.Status;
-import com.wemeow.web.util.StatusCode;
+import com.wemeow.web.util.state.Status;
+import com.wemeow.web.util.state.StatusCode;
 
 
 @Controller

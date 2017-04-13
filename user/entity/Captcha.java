@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class Captcha {
 	private int id;
 	
-	private int vCode;
+	private int code;
 	
 	private String phone;
 	

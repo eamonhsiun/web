@@ -8,8 +8,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wemeow.web.user.service.UserService;
-import com.wemeow.web.util.Status;
-import com.wemeow.web.util.StatusCode;
+import com.wemeow.web.util.state.Status;
+import com.wemeow.web.util.state.StatusCode;
+import com.wemeow.web.util.state.StatusException;
 
 
 @Controller
@@ -24,15 +25,14 @@ public class UserController {
 	public Status register(
 			@RequestParam String phone,
 			@RequestParam String nickname,
-			@RequestParam String pwd,
-			@RequestParam int vCodeId,
-			@RequestParam int vCode
+			@RequestParam String password,
+			@RequestParam int codeId,
+			@RequestParam int code
 			){
 		try {
-			return new Status(true, StatusCode.SUCCESS, userService.register(phone,nickname,pwd,vCodeId,vCode), null);
+			return new Status(true, StatusCode.SUCCESS, userService.register(phone,nickname,password,codeId,code), null);
 		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
+			return StatusException.procExcp(e);
 		}
 	}
 	
