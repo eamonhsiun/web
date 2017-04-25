@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.wemeow.web.user.dao.UserDao;
 import com.wemeow.web.user.entity.Token;
 import com.wemeow.web.user.entity.User;
-import com.wemeow.web.util.state.MeowException;
+import com.wemeow.web.util.state.StatusException;
 import com.ymxiong.open.util.security.SecurityFactory;
 
 
@@ -35,7 +35,7 @@ public class Msg0xA2Service {
 	 * @param username
 	 * @return
 	 */
-	public User getUserByPhone(String phone)throws MeowException{
+	public User getUserByPhone(String phone)throws StatusException{
 		User user =userDao.selectByPhone(phone);
 		return user;
 	}
