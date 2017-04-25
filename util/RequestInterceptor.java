@@ -1,7 +1,6 @@
 package com.wemeow.web.util;
 
 import java.lang.reflect.Method;
-import java.util.Enumeration;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,7 +35,7 @@ public class RequestInterceptor extends HandlerInterceptorAdapter {
 		HttpSession session = request.getSession();
 		if (handler instanceof HandlerMethod) {
 			HandlerMethod hm = (HandlerMethod) handler;
-			Object target = hm.getBean();
+			//Object target = hm.getBean();
 			Class<?> clazz = hm.getBeanType();
 			Method m = hm.getMethod();
 			try {
@@ -60,6 +59,7 @@ public class RequestInterceptor extends HandlerInterceptorAdapter {
 					} else if (value.equals(RequestLimit.ADMIN_PUBLIC)) {
 
 					} else if (value.equals(RequestLimit.USER_PRIVATE)) {
+						@SuppressWarnings("unchecked")
 						Map<String,Object> obj = (Map<String, Object>) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
 						int userId = Integer.parseInt(obj.get("userId").toString());
 						User u = userService.getUserById(userId);

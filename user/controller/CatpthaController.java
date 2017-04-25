@@ -14,13 +14,13 @@ import com.wemeow.web.util.state.StatusException;
 
 @RequestLimit(RequestLimit.USER_PUBLIC)
 @Controller
-@RequestMapping("user")
+@RequestMapping("captcha")
 public class CatpthaController {
 
 	@Autowired
 	private CaptchaService captchaService;
 	
-	@RequestMapping(path = "captcha")
+	@RequestMapping(path = "")
 	@ResponseBody
 	public Status create(
 			@RequestParam String phone

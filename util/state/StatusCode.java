@@ -93,4 +93,6 @@ public class StatusCode {
 	 */
 	public static final int WRONG_PHONE_FORMAT=721;
 	
+	public static final int PARA_ERROR = 722;
+	
 }
