@@ -14,7 +14,6 @@ import com.wemeow.web.util.RequestLimit;
 import com.wemeow.web.util.state.Status;
 import com.wemeow.web.util.state.StatusCode;
 
-@RequestLimit(RequestLimit.USER_PRIVATE)
 @Controller
 @RequestMapping("moment")
 public class MomentController {
@@ -22,74 +21,107 @@ public class MomentController {
 	@Autowired
 	private MomentService momentService;
 	
+
 	
-	@RequestMapping(path = "{userId}",method=RequestMethod.POST)
+	/**
+	 * @param userId
+	 * @param page
+	 * @param rows
+	 * @return
+	 */
+	@RequestMapping(path = "{userId}/public",method=RequestMethod.GET)
 	@ResponseBody
-	public Status createMoment(
+	public Status getMomentPublic(
 			@PathVariable int userId,
-			@RequestParam String content,
-			@RequestParam String extra
+			@RequestParam int page,
+			@RequestParam(required=false,defaultValue="10") int rows
 			){
 		try {
-			return new Status(true, StatusCode.SUCCESS, momentService.moment(),0);
+			return new Status(true, StatusCode.SUCCESS, momentService.viewPublicMoments(userId,page,rows),0);
 		} catch (Exception e) {
-			e.printStackTrace();
 			return StatusException.procExcp(e);
 		}
 	}
 	
-	@RequestMapping(path = "{userId}",method=RequestMethod.GET)
+	@RequestLimit(RequestLimit.USER_PRIVATE)
+	@RequestMapping(path = "{userId}/public",method=RequestMethod.POST)
 	@ResponseBody
-	public Status getMoment(
-			
+	public Status createMomentPublic(
+			@PathVariable int userId,
+			@RequestParam String content,
+			@RequestParam(required=false,defaultValue="0") int resendMomentId,
+			@RequestParam(required=false,defaultValue="") String resendUrl,
+			@RequestParam(required=false,defaultValue="") String images
 			){
-
-		return new Status(true, StatusCode.SUCCESS, momentService.moment(),0);
+		try {
+			return new Status(true, StatusCode.SUCCESS, momentService.createPublicMoment(userId,content,resendMomentId,resendUrl,images),0);
+		} catch (Exception e) {
+			return StatusException.procExcp(e);
+		}
+	}
+	
+	/**
+	 * @param userId
+	 * @param page
+	 * @param rows
+	 * @return
+	 */
+	@RequestLimit(RequestLimit.USER_PROTECTED)
+	@RequestMapping(path = "{userId}/protected",method=RequestMethod.GET)
+	@ResponseBody
+	public Status getMomentProtected(
+			@PathVariable int userId,
+			@RequestParam int page,
+			@RequestParam(required=false,defaultValue="10") int rows
+			){
+		try {
+			return new Status(true, StatusCode.SUCCESS, momentService.viewProtectedMoments(userId,page,rows),0);
+		} catch (Exception e) {
+			return StatusException.procExcp(e);
+		}
+	}
+	
+	@RequestLimit(RequestLimit.USER_PRIVATE)
+	@RequestMapping(path = "{userId}/protected",method=RequestMethod.POST)
+	@ResponseBody
+	public Status createMomentProtected(
+			@PathVariable int userId,
+			@RequestParam String content,
+			@RequestParam(required=false,defaultValue="0") int resendMomentId,
+			@RequestParam(required=false,defaultValue="") String resendUrl,
+			@RequestParam(required=false,defaultValue="") String images
+			){
+		try {
+			return new Status(true, StatusCode.SUCCESS, momentService.createProtectedMoment(userId,content,resendMomentId,resendUrl,images),0);
+		} catch (Exception e) {
+			return StatusException.procExcp(e);
+		}
 	}
 	
 	
-	@RequestMapping(path = "friend",method=RequestMethod.GET)
+	/**
+	 * 浏览该用户可浏览的所有动态
+	 * @return
+	 */
+	@RequestLimit(RequestLimit.USER_PRIVATE)
+	@RequestMapping(path = "{userId}/friend",method=RequestMethod.GET)
 	@ResponseBody
 	public Status getAllMoment(
-			
-			
+			@PathVariable int userId,
+			@RequestParam int page,
+			@RequestParam(required=false,defaultValue="10") int rows
 			){
-
-		return new Status(true, StatusCode.SUCCESS, momentService.moment(),0);
+		try {
+			return new Status(true, StatusCode.SUCCESS, momentService.viewFriendMoments(userId, page, rows),0);
+		} catch (Exception e) {
+			return StatusException.procExcp(e);
+		}
 	}
-	
-	
-	
-	
-	
-//	@RequestMapping(path = "new")
-//	@ResponseBody
-//	public Status newCaptha(
-//			@RequestParam String phone
-//			){
-//		try {
-//			Captcha captcha =captchaService.genNewCaptcha(phone);
-//			return new Status(true, StatusCode.SUCCESS, captcha.getId(), captcha.getVCode());
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			return null;
-//		}
-//	}
-//	
-//	@RequestMapping(path = "test")
-//	@ResponseBody
-//	public Status getCaptchaById(
-//			@RequestParam int id
-//			){
-//		try {
-//			Captcha captcha =captchaService.getCaptchaById(id);
-//			return new Status(true, StatusCode.SUCCESS, captcha.getId(), captcha.getVCode());
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			return null;
-//		}
-//	}
 	
 	
 	
 }
+
+
+
+

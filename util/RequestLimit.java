@@ -18,13 +18,36 @@ public @interface RequestLimit {
 	
 	String value() default ADMIN_PRIVATE;
 	
+
+	
 	
 	String ADMIN_PRIVATE = "admin_private";
 	
 	String ADMIN_PUBLIC = "admin_public";
 	
+	
+	/**
+	 * 用户私有资源
+	 * {userId}
+	 * 私有资源必须字段
+	 * viewerId 必须等于 userId
+	 * viewToken
+	 */
 	String USER_PRIVATE = "user_private";
 	
+	/**
+	 * 用户保护资源
+	 * {userId}
+	 * 私有资源必须字段
+	 * viewerId 必须与userId为friend关系
+	 * viewToken
+	 */
+	String USER_PROTECTED = "user_protected";
+	
+	/**
+	 * 用户公开资源
+	 * {userId}
+	 */
 	String USER_PUBLIC = "user_public";
 	
 }

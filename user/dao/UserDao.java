@@ -13,7 +13,7 @@ import com.wemeow.web.user.entity.User;
 public interface UserDao {
 	User selectById(int id);
 	User selectByPhone(String phone);
-	void updateTokenId(User user); 
+	
 	
 	List<User> selectMyFollowerList(int id);
 	
@@ -22,4 +22,8 @@ public interface UserDao {
 	int insertFollower(@Param("userId") int userId,@Param("followId") int followId);
 	
 	int insertNewUser(User user);
+	
+	int updateTokenId(User user); 
+	
+	int updatePassword(User user);
 }
