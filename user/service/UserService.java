@@ -82,7 +82,7 @@ public class UserService {
 			int codeId, 
 			int code) throws StatusException {
 		//验证code
-		captchaService.verify(codeId, code);
+		captchaService.verify(codeId, code, phone);
 		User user = userDao.selectByPhone(phone);
 		//检测用户是否不存在
 		Util.checkUserNull(user);
@@ -116,7 +116,8 @@ public class UserService {
 			int code
 			) throws StatusException{
 		//验证code
-		captchaService.verify(codeId, code);
+		captchaService.verify(codeId, code, phone);
+		
 		
 		User user = userDao.selectByPhone(phone);
 		//检测用户是否已存在
@@ -207,9 +208,12 @@ public class UserService {
 			Map<String, Object> item = new HashMap<>();
 			item.put("id", user.getId());
 			item.put("nickname", user.getNickname());
-			item.put("phone", user.getPhone());
-			item.put("tokenId", user.getTokenId());
+			item.put("phone", convertPhone(user.getPhone()));
 			return item;
+		}
+		
+		private static String convertPhone(String phone){
+			return phone.substring(0, 3)+"****"+phone.substring(7,11);
 		}
 		
 	}

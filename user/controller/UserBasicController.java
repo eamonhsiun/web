@@ -3,6 +3,7 @@ package com.wemeow.web.user.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -20,7 +21,7 @@ public class UserBasicController {
 	@Autowired
 	private UserService userService;
 	
-	@RequestMapping(path = "register")
+	@RequestMapping(path = "register",method=RequestMethod.GET)
 	@ResponseBody
 	public Status register(
 			@RequestParam String phone,
@@ -36,7 +37,7 @@ public class UserBasicController {
 		}
 	}
 	
-	@RequestMapping(path = "forget")
+	@RequestMapping(path = "forget",method=RequestMethod.GET)
 	@ResponseBody
 	public Status forget(
 			@RequestParam String phone,

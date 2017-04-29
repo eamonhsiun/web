@@ -8,6 +8,7 @@ import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.eamon.captcha.MobileCaptcha;
 import com.wemeow.web.user.dao.CaptchaDao;
 import com.wemeow.web.user.entity.Captcha;
 import com.wemeow.web.util.state.StatusCode;
@@ -78,9 +79,9 @@ public class CaptchaService {
 	 * @param phone
 	 * @param code
 	 */
-	private void sendToUserPhone(String phone, int code) {
+	public void sendToUserPhone(String phone, int code) {
 		new Thread(()->{
-			//MobileCaptcha.sendCaptcha(phone, code+"");
+			MobileCaptcha.sendCaptcha(phone, code+"");
 		}).start();
 	}
 
@@ -127,12 +128,14 @@ public class CaptchaService {
 	 * 验证验证码
 	 * @param captha
 	 * @param code
+	 * @param phone 
 	 * @return
 	 * @throws StateException
 	 */
-	public boolean verify(int capthaId,int code) throws StatusException {
+	public boolean verify(int capthaId,int code, String phone) throws StatusException {
 		Captcha captcha = getCaptchaById(capthaId);
 		if(captcha==null)throw new StatusException(StatusCode.CAPTCHA_N_VAILD);
+		if(!captcha.getPhone().equals(phone))throw new StatusException(StatusCode.CAPTCHA_N_VAILD);
 		boolean result = check(captcha,code);
 		if(result){
 			new Thread(()->{

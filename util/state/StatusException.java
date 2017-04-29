@@ -29,9 +29,9 @@ public class StatusException extends Exception{
 	
 	public static Status procExcp(Exception e){
 		if(e instanceof StatusException)
-			return new Status(false, ((StatusException)e).getStatusCode(), 0, 0);
+			return new Status(false, ((StatusException)e).getStatusCode(), null, null);
 		e.printStackTrace();
-		return new Status(false, StatusCode.FAILED, 0, 0);
+		return new Status(false, StatusCode.FAILED, null, null);
 	}
 
 	public int getHeader() {
