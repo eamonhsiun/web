@@ -9,7 +9,6 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.wemeow.im.IMConstants;
 import com.wemeow.web.user.dao.PasswordDao;
 import com.wemeow.web.user.dao.UserDao;
 import com.wemeow.web.user.entity.Password;
