@@ -163,14 +163,15 @@ public class UserService {
 			String username,
 			String password,
 			String IMEI,
-			String ip
+			String ip,
+			int imConstant
 			) throws StatusException{
 		User user = getUserByPhone(username);
 		if(user==null){
-			throw new StatusException(IMConstants.CMD_0x10,StatusCode.USER_NULL);
+			throw new StatusException(imConstant,StatusCode.USER_NULL);
 		}
 		if (!UserService.Util.checkPassword(user, password))
-			throw new StatusException(IMConstants.CMD_0x10,StatusCode.PASSWORD_ERROR);
+			throw new StatusException(imConstant,StatusCode.PASSWORD_ERROR);
 		// TODO:NOT FINISHED
 		if (!isAccountSecuity(IMEI, ip));
 		
