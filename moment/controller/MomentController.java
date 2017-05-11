@@ -21,7 +21,44 @@ public class MomentController {
 	@Autowired
 	private MomentService momentService;
 	
-
+		
+	@RequestMapping(path = "{userId}",method=RequestMethod.POST)
+	@ResponseBody
+	public Status postMomentPublic(
+			
+			
+			){
+		try {
+			return new Status(true, StatusCode.SUCCESS,0,0);
+		} catch (Exception e) {
+			return StatusException.procExcp(e);
+		}
+	}
+	
+	
+//	/**
+//	 * @param userId
+//	 * @param page
+//	 * @param rows
+//	 * @return
+//	 */
+//	@RequestMapping(path = "{userId}/public",method=RequestMethod.GET)
+//	@ResponseBody
+//	public Status getMomentPublic(
+////			@PathVariable int userId,
+////			@RequestParam int page,
+////			@RequestParam(required=false,defaultValue="10") int rows
+//			){
+//		try {
+//			//return new Status(true, StatusCode.SUCCESS, momentService.viewPublicMoments(userId,page,rows),0);
+//			return null;
+//		} catch (Exception e) {
+//			return StatusException.procExcp(e);
+//		}
+//	}
+	
+	
+	
 	
 	/**
 	 * @param userId
@@ -66,7 +103,6 @@ public class MomentController {
 	 * @param rows
 	 * @return
 	 */
-	@RequestLimit(RequestLimit.USER_PROTECTED)
 	@RequestMapping(path = "{userId}/protected",method=RequestMethod.GET)
 	@ResponseBody
 	public Status getMomentProtected(

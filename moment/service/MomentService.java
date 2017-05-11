@@ -20,6 +20,9 @@ import com.wemeow.web.util.state.StatusException;
 @Service
 public class MomentService {
 	
+
+	
+	
 	@Autowired
 	private MomentDao momentDao;
 	

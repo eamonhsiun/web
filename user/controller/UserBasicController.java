@@ -13,7 +13,6 @@ import com.wemeow.web.util.state.Status;
 import com.wemeow.web.util.state.StatusCode;
 import com.wemeow.web.util.state.StatusException;
 
-@RequestLimit(RequestLimit.USER_PUBLIC)
 @Controller
 @RequestMapping("user")
 public class UserBasicController {

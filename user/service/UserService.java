@@ -62,10 +62,12 @@ public class UserService {
 		List<User> list2 =userDao.selectMyFollowList(id);
 		list1.retainAll(list2);
 		list1.stream().forEach((e)->{
-			Map<String, Object> item = new HashMap<>();
-			item.put("id", e.getId());
-			item.put("nickname", e.getNickname());
-			resultList.add(item);
+			if(e.getId()!=id){
+				Map<String, Object> item = new HashMap<>();
+				item.put("id", e.getId());
+				item.put("nickname", e.getNickname());
+				resultList.add(item);
+			}
 		});
 		return resultList;
 	}

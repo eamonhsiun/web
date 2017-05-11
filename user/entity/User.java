@@ -25,7 +25,7 @@ public class User{
 	
 	private boolean isFreeze;
 	
-	private boolean isAdmin;
+	private String role;
 	
 	private Date createTime;
 	

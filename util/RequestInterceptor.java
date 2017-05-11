@@ -21,13 +21,12 @@ public class RequestInterceptor extends HandlerInterceptorAdapter {
 	private UserService userService;
 	
 	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+	public boolean preHandle(HttpServletRequest req, HttpServletResponse resp, Object handler)
 			throws Exception {
-		// HttpSession s=request.getSession();
-		// s.setAttribute("host", PathUtil.getHost());
-		// s.setAttribute("siteName", GeneUtil.SITE_NAME);
-		// 角色权限控制访问
-		return roleControl(request, response, handler);
+		resp.addHeader("Access-Control-Allow-Origin", "*");
+		resp.addHeader("Access-Control-Allow-Methods", "*");
+		resp.addHeader("Access-Control-Allow-Headers", "x-requested-with,content-type");
+		return roleControl(req, resp, handler);
 	}
 
 	/** 角色权限控制访问 */
@@ -38,6 +37,7 @@ public class RequestInterceptor extends HandlerInterceptorAdapter {
 			//Object target = hm.getBean();
 			Class<?> clazz = hm.getBeanType();
 			Method m = hm.getMethod();
+			String extra="";
 			try {
 				if (clazz != null && m != null) {
 					boolean isClzAnnotation = clazz.isAnnotationPresent(RequestLimit.class);
@@ -48,16 +48,22 @@ public class RequestInterceptor extends HandlerInterceptorAdapter {
 					} else if (isClzAnnotation) {
 						rc = clazz.getAnnotation(RequestLimit.class);
 					}
+					
 					if(rc==null){
 						return true;
 					}
 					String value = rc.value();
-
+					String viewId = (String) request.getParameter("viewId");
+					String token = (String) request.getParameter("token");
+					System.out.println("TEST " + viewId + " " + token + " " + value);
+					User user = userService.getUserById(Integer.parseInt(viewId));
+					
+					
+					
 					if (value.equals(RequestLimit.ADMIN_PRIVATE)) {
 						String obj = (String) session.getAttribute("token");
 						System.out.println("TEST " + obj);
-					} else if (value.equals(RequestLimit.ADMIN_PUBLIC)) {
-
+						
 					} else if (value.equals(RequestLimit.USER_PRIVATE)) {
 						@SuppressWarnings("unchecked")
 						Map<String,Object> obj = (Map<String, Object>) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
@@ -65,15 +71,6 @@ public class RequestInterceptor extends HandlerInterceptorAdapter {
 						User u = userService.getUserById(userId);
 						System.out.println("TEST " + u.getTokenId()+" "+u.getUpdateTime());
 
-						
-//						System.out.println("TEST " + request.getParameter("token"));
-//						Enumeration<String> keys = request.getParameterNames();
-//						while (keys.hasMoreElements()) {
-//							String k = keys.nextElement();
-//							System.out.println(k + " = " + request.getParameter(k));
-//						}
-						
-					} else if (value.equals(RequestLimit.USER_PUBLIC)) {
 
 					} else {
 
@@ -92,30 +89,6 @@ public class RequestInterceptor extends HandlerInterceptorAdapter {
 			}
 
 		}
-
-		// try {
-		// if (clazz!=null && m != null ) {
-		// boolean isClzAnnotation=
-		// clazz.isAnnotationPresent(RoleControl.class);
-		// boolean isMethondAnnotation=m.isAnnotationPresent(RoleControl.class);
-		// RoleControl rc=null;
-		// //如果方法和类声明中同时存在这个注解，那么方法中的会覆盖类中的设定。
-		// if(isMethondAnnotation){
-		// rc=m.getAnnotation(RoleControl.class);
-		// }else if(isClzAnnotation){
-		// rc=clazz.getAnnotation(RoleControl.class);
-		// }
-		// String value=rc.value();
-		// Object obj=session.getAttribute(GeneUtil.SESSION_USERTYPE_KEY);
-		// String curUserType=obj==null?"":obj.toString();
-		// //进行角色访问的权限控制，只有当前用户是需要的角色才予以访问。
-		// boolean isEquals=StringUtils.checkEquals(value, curUserType);
-		// if(!isEquals){
-		// //401未授权访问
-		// response.setStatus(401);
-		// return false;
-		// }
-		// }
 
 		return true;
 	}
