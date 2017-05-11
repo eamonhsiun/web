@@ -19,6 +19,8 @@ public class User{
 	
 	private int tokenId;
 	
+	private String authc;
+	
 	private String password;
 	
 	private String salt;

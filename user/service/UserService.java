@@ -9,9 +9,11 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.wemeow.im.IMConstants;
 import com.wemeow.web.user.dao.PasswordDao;
 import com.wemeow.web.user.dao.UserDao;
 import com.wemeow.web.user.entity.Password;
+import com.wemeow.web.user.entity.Token;
 import com.wemeow.web.user.entity.User;
 import com.wemeow.web.util.state.StatusCode;
 import com.wemeow.web.util.state.StatusException;
@@ -29,6 +31,9 @@ public class UserService {
 	
 	@Autowired
 	private CaptchaService captchaService;
+	
+	@Autowired
+	private TokenService tokenService;
 	
 	/**
 	 * 根据用户id获取用户
@@ -154,11 +159,42 @@ public class UserService {
 		return Util.genUserMap(user);
 	}
 	
+	public User login(
+			String username,
+			String password,
+			String IMEI,
+			String ip
+			) throws StatusException{
+		User user = getUserByPhone(username);
+		if(user==null){
+			throw new StatusException(IMConstants.CMD_0x10,StatusCode.USER_NULL);
+		}
+		if (!UserService.Util.checkPassword(user, password))
+			throw new StatusException(IMConstants.CMD_0x10,StatusCode.PASSWORD_ERROR);
+		// TODO:NOT FINISHED
+		if (!isAccountSecuity(IMEI, ip));
+		
+		Token token =tokenService.createToken(
+				user.getId(), 
+				Util.randomToken(), 
+				IMEI, 
+				ip);
+
+		
+		userDao.updateToken(token);
+		user.setTokenId(token.getId());
+		user.setAuthc(token.getAuthc());
+		
+		return user;
+	}
+	
+	
 	
 	public static class Util{
 		public static String randomToken(){
 			String token = UUID.randomUUID().toString().substring(0, 18).toUpperCase().replaceAll("-", "");
 			return token;
+		
 		}
 		public static String randomSalt(){
 			String salt = UUID.randomUUID().toString().substring(9, 18).toUpperCase().replaceAll("-", "");
@@ -216,6 +252,12 @@ public class UserService {
 		
 		private static String convertPhone(String phone){
 			return phone.substring(0, 3)+"****"+phone.substring(7,11);
+		}
+		
+		
+		public static boolean checkAuthc(String authc1,String authc2) throws StatusException{
+			if(!authc1.equals(authc2))throw new StatusException(StatusCode.PERMISSION_LOW);
+			return true;
 		}
 		
 	}

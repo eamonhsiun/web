@@ -20,9 +20,11 @@ public @interface RequestLimit {
 	
 	
 	String SUPER_ADMIN_PRIVATE = "super_admin_private";
+	String SUPER_ADMIN = "super_admin";
+	
 	
 	String ADMIN_PRIVATE = "admin_private";
-	
+	String ADMIN = "admin";
 	/**
 	 * 用户私有资源
 	 * {userId}
@@ -31,6 +33,6 @@ public @interface RequestLimit {
 	 * viewToken
 	 */
 	String USER_PRIVATE = "user_private";
-	
+	String USER = "user";
 	
 }

@@ -19,6 +19,8 @@ public class Token {
 	
 	private String IMEI;
 	
+	private String authc;
+	
 	private Date createTime;
 	
 	private String createBy;

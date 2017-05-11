@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import com.wemeow.web.user.entity.Token;
 import com.wemeow.web.user.entity.User;
 
 
@@ -23,7 +24,8 @@ public interface UserDao {
 	
 	int insertNewUser(User user);
 	
-	int updateTokenId(User user); 
+	//int updateTokenId(User user); 
+	int updateToken(Token token);
 	
 	int updatePassword(User user);
 }
